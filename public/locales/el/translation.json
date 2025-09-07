@@ -1,0 +1,23 @@
+{
+    
+    "welcome_back": "Welcome back",
+    "credentials_enter": "Enter your credentials to access your account",
+    "password": "Password",
+    "validation_form_required_pass": "Password is required",
+    "validation_form_password_minimum_chars": "Password must be at least 6 characters long",
+    "email_is_required": "Email is required",
+    "sign_in": "Sign in",
+    "invalid_email_or_password": "Invalid email or password. Please try again.",
+    "settings":"Settings",
+    "logout": "Logout",
+    "dashboard":"Dashboard",
+    "customers":"Customers",
+    "customer_groups":"Customer Groups",
+    "invitations":"Invitations",
+    "products":"Products",
+    "collections":"Collections",
+    "orders":"Orders",
+    "price_lists":"Price Lists",
+    "campaigns":"Campaigns",
+    "analytics":"Analytics"
+}

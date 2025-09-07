@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h2 {
+    @apply text-h2 font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-h3 font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply text-h4 font-medium tracking-tight;
+  }
+
+  p {
+    @apply text-body font-regular;
+  }
+
+  .small-text {
+    @apply text-small font-regular;
+  }
+
+  .label-text {
+    @apply text-label font-medium uppercase;
+  }
+
+  button {
+    cursor: pointer;
+  }
+  
+  .price.eur::after {
+    content: ' €'; /* or '$', '£', etc. */
+    font-weight: normal;
+    font-size: 0.9em;
+    margin-left: 0.2em;
+  }
+
+  .price.usd::after {
+    content: '$'; 
+    font-weight: normal;
+    font-size: 0.9em;
+    margin-left: 0.2em;
+  }
+  /* Responsive typography */
+  @media (max-width: 1023px) {
+    h1 {
+      @apply text-tablet-h1;
+    }
+    h2 {
+      @apply text-tablet-h2;
+    }
+    h3 {
+      @apply text-tablet-h3;
+    }
+  }
+
+  @media (max-width: 639px) {
+    h1 {
+      @apply text-mobile-h1;
+    }
+    h2 {
+      @apply text-mobile-h2;
+    }
+    h3 {
+      @apply text-mobile-h3;
+    }
+  }
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans text-main;
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply bg-card rounded-xl border p-5 shadow-sm transition-all duration-200 hover:shadow-md;
+  }
+  
+  .sidebar-link {
+    @apply flex items-center gap-3 rounded-md px-3 py-2 text-sidebar-foreground transition-colors hover:bg-white/10;
+  }
+  
+  .sidebar-link.active {
+    @apply bg-white/10;
+  }
+}
