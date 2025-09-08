@@ -38,7 +38,6 @@ export const ApiKeyBlock = () => {
                 <CardDescription></CardDescription>
             </CardHeader>
             <CardContent>
-                <Label htmlFor="company-name">Api Key</Label>
                 <div className="flex items-center">
                     {show ?
                         <Input key={apiKey.token} readOnly={true} name="companyName" id="company-name" defaultValue={apiKey.token}  />
