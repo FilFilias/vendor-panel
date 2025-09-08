@@ -78,6 +78,9 @@ type Pages = {
       "ns": string;
     };
   };
+  "/docs": {
+    params: {};
+  };
   "/login": {
     params: {};
   };
@@ -86,7 +89,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/customer/:id" | "/customer-create" | "/customers" | "/invitations" | "/invite-customer" | "/order/:orderID" | "/orders" | "/product/add" | "/product/edit/:id" | "/products" | "/settings" | "/settings/user/create" | "/settings/user/edit/:id" | "/settings/user/info" | "/settings/users-list" | "/actions/logout" | "/actions/set-theme" | "/api/locales/:lng/:ns" | "/login";
+    page: "/" | "/customer/:id" | "/customer-create" | "/customers" | "/invitations" | "/invite-customer" | "/order/:orderID" | "/orders" | "/product/add" | "/product/edit/:id" | "/products" | "/settings" | "/settings/user/create" | "/settings/user/edit/:id" | "/settings/user/info" | "/settings/users-list" | "/actions/logout" | "/actions/set-theme" | "/api/locales/:lng/:ns" | "/docs" | "/login";
   };
   "routes/__main/__layout.tsx": {
     id: "routes/__main/__layout";
@@ -171,6 +174,10 @@ type RouteFiles = {
   "routes/api/locales/$lng/$ns/index.ts": {
     id: "routes/api/locales/$lng/$ns/index";
     page: "/api/locales/:lng/:ns";
+  };
+  "routes/docs.tsx": {
+    id: "routes/docs";
+    page: "/docs";
   };
   "routes/login/index.tsx": {
     id: "routes/login/index";

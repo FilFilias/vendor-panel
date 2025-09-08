@@ -16,7 +16,8 @@ import {
   Mail,
   Moon,
   Sun,
-  LogOut
+  LogOut,
+  FileText
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -141,6 +142,13 @@ export function Sidebar() {
                 <LogOut className="mr-2 h-5 w-5 text-white" />
                 Logout
             </button>
+            <Link 
+              to='/docs'
+              className={`group relative flex w-full items-center rounded-md py-2 transition-colors hover:bg-white/10 text-white ${expanded ? "px-3" : "justify-center px-2"}`}
+            >
+                <FileText className="mr-2 h-5 w-5 text-white" />
+                Docs
+            </Link>
         </div>
       </div>
     </div>
