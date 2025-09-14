@@ -24,7 +24,6 @@ const VentorLogo: React.FC<VentorLogoProps> = ({
       enableBackground: "new 0 0 200 60",
     }}
     xmlSpace="preserve"
-    style={{height:height}}
     className='mr-5 w-full max-w-[120px] sm:max-w-[200px] h-auto'
   >
     <style type="text/css">

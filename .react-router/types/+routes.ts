@@ -24,9 +24,6 @@ type Pages = {
   "/customers": {
     params: {};
   };
-  "/dashboard": {
-    params: {};
-  };
   "/invitations": {
     params: {};
   };
@@ -37,6 +34,19 @@ type Pages = {
     params: {
       "orderID": string;
     };
+  };
+  "/order/create/:orderID": {
+    params: {
+      "orderID": string;
+    };
+  };
+  "/order/create/complete/:orderID": {
+    params: {
+      "orderID": string;
+    };
+  };
+  "/order/create/select-customer": {
+    params: {};
   };
   "/orders": {
     params: {};
@@ -92,11 +102,11 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/customer/:id" | "/customer-create" | "/customers" | "/dashboard" | "/invitations" | "/invite-customer" | "/order/:orderID" | "/orders" | "/product/add" | "/product/edit/:id" | "/products" | "/settings" | "/settings/user/create" | "/settings/user/edit/:id" | "/settings/user/info" | "/settings/users-list" | "/actions/logout" | "/actions/set-theme" | "/api/locales/:lng/:ns" | "/docs" | "/login";
+    page: "/" | "/customer/:id" | "/customer-create" | "/customers" | "/invitations" | "/invite-customer" | "/order/:orderID" | "/order/create/:orderID" | "/order/create/complete/:orderID" | "/order/create/select-customer" | "/orders" | "/product/add" | "/product/edit/:id" | "/products" | "/settings" | "/settings/user/create" | "/settings/user/edit/:id" | "/settings/user/info" | "/settings/users-list" | "/actions/logout" | "/actions/set-theme" | "/api/locales/:lng/:ns" | "/docs" | "/login";
   };
   "routes/__main/__layout.tsx": {
     id: "routes/__main/__layout";
-    page: "/customer/:id" | "/customer-create" | "/customers" | "/dashboard" | "/" | "/invitations" | "/invite-customer" | "/order/:orderID" | "/orders" | "/product/add" | "/product/edit/:id" | "/products" | "/settings" | "/settings/user/create" | "/settings/user/edit/:id" | "/settings/user/info" | "/settings/users-list";
+    page: "/customer/:id" | "/customer-create" | "/customers" | "/" | "/invitations" | "/invite-customer" | "/order/:orderID" | "/order/create/:orderID" | "/order/create/complete/:orderID" | "/order/create/select-customer" | "/orders" | "/product/add" | "/product/edit/:id" | "/products" | "/settings" | "/settings/user/create" | "/settings/user/edit/:id" | "/settings/user/info" | "/settings/users-list";
   };
   "routes/__main/customer/$id/index.tsx": {
     id: "routes/__main/customer/$id/index";
@@ -109,10 +119,6 @@ type RouteFiles = {
   "routes/__main/customers/index.tsx": {
     id: "routes/__main/customers/index";
     page: "/customers";
-  };
-  "routes/__main/dashboard/index.tsx": {
-    id: "routes/__main/dashboard/index";
-    page: "/dashboard";
   };
   "routes/__main/index/index.tsx": {
     id: "routes/__main/index/index";
@@ -129,6 +135,18 @@ type RouteFiles = {
   "routes/__main/order/$orderID/index.tsx": {
     id: "routes/__main/order/$orderID/index";
     page: "/order/:orderID";
+  };
+  "routes/__main/order/create/$orderID/index.tsx": {
+    id: "routes/__main/order/create/$orderID/index";
+    page: "/order/create/:orderID";
+  };
+  "routes/__main/order/create/complete/$orderID/index.tsx": {
+    id: "routes/__main/order/create/complete/$orderID/index";
+    page: "/order/create/complete/:orderID";
+  };
+  "routes/__main/order/create/select-customer/index.tsx": {
+    id: "routes/__main/order/create/select-customer/index";
+    page: "/order/create/select-customer";
   };
   "routes/__main/orders/index.tsx": {
     id: "routes/__main/orders/index";

@@ -47,8 +47,11 @@ export const ProductInfo = () => {
         setEdit(false);
         // Reset state to initial product details
         setFormState({
+            id: product.id,
             title: product.title,
             description: product.description,
+            color: product.color,
+            vatType: product.vatType,
             category: {
                 id: product.category.id,
                 value: product.category.id,

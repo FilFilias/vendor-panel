@@ -58,7 +58,7 @@ export default function OrdersListPage() {
             <DownloadCloud className="h-4 w-4" />
             <span className="hidden sm:inline">{t("export")}</span>
           </Button> */}
-          <Link to={`/order/create`} className="px-4 py-2 flex items-center gap-2 bg-primary border border-primary rounded-md text-sm font-medium hover:bg-orange hover:border-orange text-white">
+          <Link to={`/order/create/select-customer`} className="px-4 py-2 flex items-center gap-2 bg-primary border border-primary rounded-md text-sm font-medium hover:bg-orange hover:border-orange text-white">
             <Eye className="h-4 w-4" />
             <span className="hidden sm:inline">{t("create")}</span>
           </Link>
