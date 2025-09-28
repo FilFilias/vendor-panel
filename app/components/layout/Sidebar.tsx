@@ -61,7 +61,7 @@ export function Sidebar() {
   let {t} = useTranslation() 
 
   const navItems = [
-    { name: t('dashboard'), path: "/dashboard", icon: <Home className="h-5 w-5" /> },
+    { name: t('dashboard'), path: "/", icon: <Home className="h-5 w-5" /> },
     { name: t('customers'), path: "/customers", icon: <Users className="h-5 w-5" /> },
     // { name: t('customer_groups'), path: "/customer-groups", icon: <UserCheck className="h-5 w-5" /> },
     { name: t('invitations'), path: "/invitations", icon: <Mail className="h-5 w-5" /> },

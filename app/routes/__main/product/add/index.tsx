@@ -21,7 +21,7 @@ export async function action({
 
   try {
     const product = JSON.parse(body.get("product") as string)
-    console.log(product)
+
     let result = await sdk.client.fetch(`/vendor/product/create`,{
       method: "POST",
       headers: {

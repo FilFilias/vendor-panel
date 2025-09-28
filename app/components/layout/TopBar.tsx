@@ -31,7 +31,7 @@ export function TopBar() {
   return (
     <div className="z-50 left-0 fixed w-full bg-primary dark:bg-gray-900 flex h-16 items-center justify-between border-b px-4">
       <div className={`flex items-center`}>
-        <Link to="/dashboard" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <VentorLogo height={40}/>
         </Link>
       </div>
