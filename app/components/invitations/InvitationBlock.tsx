@@ -36,33 +36,31 @@ const InvitationBlock:React.FC<InvitationBlockProps> = ({invitation}) => {
                 {t("sent_by")}: <span className='text-lg text-main dark:text-white'>{invitation.sentBy}</span>
                 </p>
             </div>
-            {invitation.status == 'Accepted' &&
+            {invitation.status == 'Accepted' ?
                 <span className='bg-success p-2 rounded-full text-white text-xs'>
                     {t("accepted")}
                 </span>
-            }
-            {invitation.status !== 'Accepted' &&
-                invitation.expired ?
-                <div className='flex flex-col items-center space-y-2'>
-                    <span className='w-full text-center bg-destructive p-2 rounded-full text-white text-xs'>
-                        {t("expired")}
-                    </span>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={onReSendClick}
-                        className="border-main hover:border-orange rounded-full max-w-[250px] w-full flex items-center justify-center gap-2"
-                    >
-                        <RefreshCcw 
-                        className={`h-3.5 w-3.5`} 
-                        />
-                        {t("resend")}
-                    </Button>
-                </div>
             :
-                <span className='bg-ring p-2 rounded-full text-white text-xs'>
-                    {t("pending")}
-                </span>
+                invitation.status !== 'Accepted' &&
+                    invitation.expired ?
+                        <div className='flex flex-col items-center space-y-2'>
+                            <span className='w-full text-center bg-destructive p-2 rounded-full text-white text-xs'>
+                                {t("expired")}
+                            </span>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={onReSendClick}
+                                className="border-main hover:border-orange rounded-full max-w-[250px] w-full flex items-center justify-center gap-2"
+                            >
+                                <RefreshCcw className={`h-3.5 w-3.5`} />
+                                {t("resend")}
+                            </Button>
+                        </div>
+                    :
+                        <span className='bg-ring p-2 rounded-full text-white text-xs'>
+                            {t("pending")}
+                        </span>
             }
             </div>
         </div>
