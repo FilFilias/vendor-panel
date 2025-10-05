@@ -11,17 +11,28 @@ import { Separator } from "~/components/ui/separator";
 import { CheckCircle } from "lucide-react";
 import { useFetcher, useLoaderData } from "react-router";
 import { useState } from "react";
-import { custom } from "zod";
+import { StoreVendorCustomerAddress } from "~/types/vendor";
 
 export const OrderCustomerInfo = () => {
 
-    const {customer} = useLoaderData()
-    const [selectedAddressId, setSelectedAddressId] = useState<string>();
+    const {customer, cart} = useLoaderData()
+
+    const preselectedAddressId = customer.addresses.filter((a: StoreVendorCustomerAddress) => {
+        return a.company === cart.shippingAddress?.company &&
+        a.address_1 === cart.shippingAddress?.address_1 &&
+        a.city === cart.shippingAddress?.city &&
+        a.country_code === cart.shippingAddress?.country_code &&
+        a.postal_code === cart.shippingAddress?.postal_code &&
+        a.phone === cart.shippingAddress?.phone
+    });
+
+    const [selectedAddressId, setSelectedAddressId] = useState<string>(preselectedAddressId?.[0]?.id || "");
     const fetcher = useFetcher()
-    
+
     const handleAddressChange = (val: string) => {
         setSelectedAddressId(val);
-        const addr = customer.addresses.find((a) => a.id === val);
+        const addr = customer.addresses.find((a: StoreVendorCustomerAddress) => a.id === val);
+
         fetcher.submit({ 
             address:JSON.stringify({
                 id: addr.id,
@@ -64,8 +75,8 @@ export const OrderCustomerInfo = () => {
                         <SelectValue placeholder="Select address" />
                     </SelectTrigger>
                     <SelectContent>
-                        {customer.addresses.map((address) => (
-                        <SelectItem key={address.id} value={address.id}>
+                        {customer.addresses.map((address: StoreVendorCustomerAddress) => (
+                        <SelectItem key={address.id || ''} value={address.id || ''}>
                             {address.address_1} {' '}{address.city}, {address.postal_code}
                         </SelectItem>
                         ))}

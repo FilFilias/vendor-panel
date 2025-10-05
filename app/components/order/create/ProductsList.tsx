@@ -1,9 +1,10 @@
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
 import { Plus, Minus } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
-import { useState } from "react";
+
 import { Form } from "react-router";
+import { Image } from "~/components/images/image";
+
 type OrderProductCardType = {
     product: {
         id:string;
@@ -28,7 +29,7 @@ export const OrderProductCard:React.FC<OrderProductCardType> = ({product,currenc
             <CardContent className="p-4">
             <div className="flex items-start gap-4">
                 <div className="w-20 h-20 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
-                    <img 
+                    <Image
                         src={product.image} 
                         alt={product.name}
                         className="object-cover h-full w-full rounded-lg"

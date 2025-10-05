@@ -22,7 +22,7 @@ export function OrderCard({order} : {order:StoreVendorCustomerOrder}) {
           <div className="text-sm text-muted-foreground">{new Date(order.created_at).toLocaleString()}</div>
         </div>
         <div className="flex flex-col gap-1 sm:items-end text-sm mt-2 sm:mt-0">
-          <span className={`font-semibold price ${order.currency_code}`}>{order.total}</span>
+          <span className={`font-semibold price ${order.currency_code}`}>{order.total?.toFixed(2)}</span>
           <span
             className={
               order.status === "completed"

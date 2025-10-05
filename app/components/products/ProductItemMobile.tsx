@@ -3,8 +3,8 @@ import { Switch } from "../ui/switch"
 import { Button } from "../ui/button"
 import { ProductsItemProps } from "./ProductItemsDesktop"
 import { useTranslation } from "react-i18next"
-import { Edit } from "lucide-react";
 import { Link } from "react-router"
+import { Image } from "../images/image"
 
 export const ProductItemMobile:React.FC<ProductsItemProps> = ({product,handleDeleteClick,handleStatusUpdate}) => {
         
@@ -24,10 +24,10 @@ export const ProductItemMobile:React.FC<ProductsItemProps> = ({product,handleDel
 
                 <Link to={`/product/edit/${product.id}`} >
                     <div className="w-16 h-16 rounded-md overflow-hidden flex-shrink-0  bg-gray-200 p-2">
-                        <img
-                        src={product.image || "/placeholder.svg"}
-                        alt={product.title}
-                        className="h-full w-full object-contain mix-blend-multiply"
+                        <Image
+                            src={product.image}
+                            alt={product.title}
+                            className="h-full w-full object-contain mix-blend-multiply"
                         />
                     </div>
                 </Link>

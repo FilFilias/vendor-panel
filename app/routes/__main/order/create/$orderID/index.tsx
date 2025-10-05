@@ -119,7 +119,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     }
     
     const salesChannelID = await salesChannelCookie.parse(request.headers.get("Cookie"));
-    console.log('salesChannelID: ',salesChannelID)
     const limit = 12;
     const page = urlSearchParams.page ?? 1;
 

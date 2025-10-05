@@ -3,8 +3,9 @@ import { StoreVendorProduct } from "~/types/vendor";
 import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
-import { Link, useFetcher } from "react-router";
+import { Link } from "react-router";
 import { Edit } from "lucide-react";
+import { Image } from "../images/image";
 
 export type ProductsItemProps = {
     product: StoreVendorProduct;
@@ -26,13 +27,10 @@ export const ProductItemsDesktop:React.FC<ProductsItemProps> = ({product,handleD
         <TableRow>
             <TableCell>
             <div className="w-16 h-16 rounded-md overflow-hidden bg-gray-200 p-2">
-                <img
-                    src={product.image || "/placeholder.svg"}
+                <Image
+                    src={product.image}
                     alt={product.title}
                     className="h-full w-full object-contain mix-blend-multiply"
-                    onError={(e) => {
-                        e.currentTarget.src = "/ventor_placeholder.png";
-                    }}
                 />
             </div>
             </TableCell>

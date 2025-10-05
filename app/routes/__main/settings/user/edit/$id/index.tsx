@@ -61,10 +61,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   let session = await sessionStorage.getSession(request.headers.get("Cookie"))
   let userID = params.id
   let currentUser = await getVendorAdminByID(session.data["connect.sid"] as string, userID);
-
-  if (currentUser?.role == 'user') {
-    return redirect("/settings");
-  }
   
   let user = {
     id: currentUser?.id,

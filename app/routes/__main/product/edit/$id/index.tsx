@@ -46,7 +46,7 @@ export async function action({
           const size = variant.options.filter( opt => opt.title == 'Size')[0]
           const title = size?.value
 
-          if (title !== ' ') {
+          if (title && title !== ' ') {
             variant.title = title  
           }
           

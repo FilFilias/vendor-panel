@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { useTranslation } from "react-i18next";
+import { Image } from "../images/image";
 
 type OrderItemsProps = {
     items:{
@@ -28,11 +29,11 @@ export const OrderItems: React.FC<OrderItemsProps> = ({items,currency}) => {
               {items.map((item) => (
                 <div className="flex items-start" key={item.id}>
                     <div className="h-16 w-16 rounded-md overflow-hidden bg-gray-200 flex-shrink-0 bg-gray-100 dark:bg-gray-200 p-2">
-                    <img
+                      <Image
                         src={item.imageUrl}
                         alt={item.title}
                         className="h-full w-full object-contain mix-blend-multiply"
-                    />
+                      />
                     </div>
                     <div className="ml-4 flex-grow dark:text-white">
                     <p className="font-medium text-sm  leading-tight line-clamp-2">{item.title}</p>

@@ -25,7 +25,6 @@ export async function action({
     case "update-address": {
       try {
         const address = body.get("address" as string)
-
         let result = await sdk.client.fetch(`/vendor/draft-orders/${id}/update-address`,{
           method: "POST",
           headers: {
@@ -68,6 +67,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let session = await sessionStorage.getSession(request.headers.get("Cookie"))
 
     const {draft_order} = await getDraftOrder(session.data['connect.sid'],id)
+
     const cart = {
       items: draft_order?.items.map( item => ({
         id: item.id,
@@ -82,6 +82,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         availability: item.availability,
         total: item.total
       })),
+      shippingAddress: draft_order.shipping_address,
       taxTotal: draft_order.item_tax_total ?? 0,
       subTotal: draft_order.item_subtotal ?? 0,
       total: draft_order.item_total ?? 0,

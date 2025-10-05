@@ -3,6 +3,7 @@ import { Card, CardContent } from "~/components/ui/card";
 import { ArrowRight, Plus, Minus, ShoppingCart, X } from "lucide-react";
 import { Form, useLoaderData } from "react-router";
 import { LinkButton } from "~/components/ui/buttoLink";
+import { Image } from "~/components/images/image";
 
 export const CreateOrderCart = () => {
 
@@ -27,17 +28,17 @@ export const CreateOrderCart = () => {
                     <div key={item.productId} className="border-b border-gray-100 pb-4 last:border-b-0">
                         <div className="flex gap-3">
                         <div className="w-12 h-12 bg-muted rounded-md flex items-center justify-center flex-shrink-0">
-                            <img 
-                            src={item.image} 
-                            alt={item.name}
-                            className="object-cover h-full w-full rounded-md"
+                            <Image 
+                                src={item.image} 
+                                alt={item.name}
+                                className="object-cover h-full w-full rounded-md"
                             />
                         </div>
                         <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between">
                             <div className="flex-1">
                                 <h4 className="font-medium text-sm leading-tight mb-1">{item.name}</h4>
-                                <p className="text-xs text-muted-foreground mb-2">{item.dimension}</p>
+                                {item.dimension !== 'Default' && <p className="text-xs text-muted-foreground mb-2">{item.dimension}</p>}
                             </div>
                             <Form method="post">
                                 <input hidden name='item_id' defaultValue={item.id} />
@@ -89,7 +90,7 @@ export const CreateOrderCart = () => {
                                 ${(item.price * item.quantity).toFixed(2)} (excl. VAT)
                                 </p> */}
                                 <p className={`text-sm font-medium price ${cart.currency}`}>
-                                {item.price}
+                                {item.price?.toFixed(2)}
                                 </p>
                             </div>
                             </div>
