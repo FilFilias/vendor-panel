@@ -7,6 +7,7 @@ interface StandalonePaginationProps {
   currentPage: number;
   totalPages: number;
   baseUrl: string;
+  hasParams?: boolean;
   className?: string;
 }
 
@@ -14,11 +15,15 @@ export function PaginationComp({
   currentPage, 
   totalPages, 
   baseUrl,
-  className = ""
+  className = "",
+  hasParams=false
 }: StandalonePaginationProps) {
   if (totalPages <= 1) return null;
 
   const createPageUrl = (page: number) => {
+    if (hasParams) {
+      return baseUrl + '&page=' + page
+    }
     return baseUrl + '?page=' + page
   };
 

@@ -160,6 +160,15 @@ export const ProductInfo = () => {
                                         <ProductImage imageUrl={product.imageUrl} />
                                     </div>
                                     <div>
+                                        <Label className="dark:text-white">ID</Label>
+                                        <Input
+                                            disabled={true}
+                                            name="id"
+                                            value={product.external_id}
+                                            className="dark:text-white"
+                                        />
+                                    </div>
+                                    <div>
                                         <Label className="dark:text-white">Title</Label>
                                         <Input
                                             disabled={!edit}

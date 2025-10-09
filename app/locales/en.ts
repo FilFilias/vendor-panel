@@ -126,6 +126,8 @@ export default {
     "order_comments":"Order Comments",
     "order_not_found": "Order not found",
     "order_not_exist": "The order you're looking for doesn't exist.",
+    "product_not_found": "Product not found",
+    "product_not_exist": "The product you're looking for doesn't exist.",
     "manage_product_inventory": "Manage your product inventory",
     "add_product": "Add Product",
     "add": "Add",
@@ -142,5 +144,9 @@ export default {
     "update": "Update",
     "update_product_status": "Update Product Status",
     "sure_to_update_status": "Are you sure you want to update status of ",
-
+    "total_products": "Total Products",
+    "products_search":"Search products...",
+    "search":"Search",
+    "categories":"Categories",
+    "total_products_category": "Total Products in Category"
   };

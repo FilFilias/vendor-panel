@@ -10,13 +10,14 @@ import { OrderItems } from "~/components/order/OrderItems";
 import { OrderSummary } from "~/components/order/OrderSummary";
 import { OrderComments } from "~/components/order/OrderComments";
 import { useTranslation } from "react-i18next";
+import { getOrder } from "~/providers/orders";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   let orderID = params.orderID
 
-  let {order} = await sdk.store.order.retrieve(orderID,{fields: "+customer.*"})
+  let order = await getOrder(orderID as string)
 
-  let orderInfo
+  let orderInfo = null
   if (order?.id && order?.items && order?.shipping_address && order?.billing_address && order?.customer) {
     let surcharge = order.items.filter( item => item.title == 'Surcharge')[0]
 
@@ -85,24 +86,25 @@ export default function OrderInfdo() {
           <ArrowLeft className="mr-2 h-4 w-4" /> {t("back_to_orders")}
         </LinkButton>
       </div>
-
-      <div className="space-y-6">
-        {/* Order Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2 dark:text-white">{orderInfo.transactionID}</h1>
-          <p className="text-muted-foreground">{orderInfo.date}</p>
+      {orderInfo &&
+        <div className="space-y-6">
+          {/* Order Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-2 dark:text-white">{orderInfo.transactionID}</h1>
+            <p className="text-muted-foreground">{orderInfo.date}</p>
+          </div>
+          <OrderShippingAddress shippingAddress={orderInfo.shippingAddress} />
+          <OrderItems items={orderInfo.items} currency={orderInfo.currency} />
+          { orderInfo.comments && <OrderComments comments={orderInfo.comments} /> }
+          <OrderSummary
+            subtotal={orderInfo.subtotal}
+            taxTotal={orderInfo.taxTotal}
+            totalAmount={orderInfo.total}
+            currency={orderInfo.currency}
+            surcharge={orderInfo.surcharge}
+          />
         </div>
-        <OrderShippingAddress shippingAddress={orderInfo.shippingAddress} />
-        <OrderItems items={orderInfo.items} currency={orderInfo.currency} />
-        { orderInfo.comments && <OrderComments comments={orderInfo.comments} /> }
-        <OrderSummary
-          subtotal={orderInfo.subtotal}
-          taxTotal={orderInfo.taxTotal}
-          totalAmount={orderInfo.total}
-          currency={orderInfo.currency}
-          surcharge={orderInfo.surcharge}
-        />
-      </div>
+      }
     </div>
   )
 };

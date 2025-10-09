@@ -1,3 +1,4 @@
+import { StoreProduct, StoreProductListResponse } from "@medusajs/types";
 import { sdk } from "~/lib/config";
 import { StoreVendor, StoreVendorAdmin, StoreVendorCustomerResponse, StoreVendorCustomersResponse, StoreVendorInvitationsResponse, StoreVendorOrdersResponse, StoreVendorProductByIDResponse, StoreVendorProductsResponse, VendorApiKey } from "~/types/vendor";
 
@@ -138,25 +139,50 @@ export const getVendorsCustomer = async (connectSID: string,page:number, custome
   }
 }
 
-export const getVendorsProducts = async (connectSID: string,page:number): Promise<StoreVendorProductsResponse > => {    
-  let skip = (page -1) * 15
+export const getVendorsProducts = async (connectSID: string,page:number,categoryIDs:string[] | undefined, salesChannelID:string): Promise<{
+  result:StoreProduct[],count:number,take:number,skip:number; error?:any}
+> => {    
+  console.log(categoryIDs)
   try {
-    let products = await sdk.client.fetch(`/vendor/products?skip=${skip}`, {
-      method: "GET",
+    let {products,count,limit,offset} = await sdk.store.product.list({
+      sales_channel_id: salesChannelID,
+      category_id: categoryIDs ?? [],
+      limit: 15,
+      offset: Math.max(0, (page - 1) * 15),
+      fields:"id,title,status,thumbnail"
+    })
+    return {result:products,count,take:limit,skip:offset}
+  }
+  catch (error) {
+    return {
+      result:[],
+      count:0,
+      take:0,
+      skip:0,
+      error
+    };
+  }
+}
+
+export const getVendorsProductsByIds = async (connectSID: string,ids:string[]): Promise<StoreVendorProductsResponse | null> => {    
+  try {
+    let products = await sdk.client.fetch(`/vendor/product/by-ids`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         'Authorization': `Bearer ${connectSID}`
-      }
+      },
+      body: JSON.stringify({ids:ids})
     })
 
     return products as StoreVendorProductsResponse;
   }
   catch (error) {
-    return error;
+    return null;
   }
 }
 
-export const getVendorsProductByID = async (connectSID: string,id:string): Promise<StoreVendorProductByIDResponse > => {    
+export const getVendorsProductByID = async (connectSID: string,id:string): Promise<StoreVendorProductByIDResponse | null > => {    
 
   try {
     let products = await sdk.client.fetch(`/vendor/product/${id}`, {
@@ -170,7 +196,8 @@ export const getVendorsProductByID = async (connectSID: string,id:string): Promi
     return products as StoreVendorProductByIDResponse;
   }
   catch (error) {
-    return error;
+    console.log(error);
+    return null;
   }
 }
 
@@ -190,3 +217,4 @@ export const getVendorApiKey = async (connectSID: string): Promise<VendorApiKey 
     return null;
   }
 }
+

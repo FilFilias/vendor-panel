@@ -71,6 +71,7 @@ export const loader: LoaderFunction = async ({ request, context }) => {
       lastName: vendorAdmin.last_name,
       email: vendorAdmin.email,
       createdAt: vendorAdmin.created_at,
+      role: vendorAdmin.role,
     }
   }
 

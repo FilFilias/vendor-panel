@@ -1,4 +1,4 @@
-import { AdminDraftOrder } from "@medusajs/types"
+import { AdminDraftOrder, StoreOrder } from "@medusajs/types"
 import { sdk } from "~/lib/config"
 
 export const createDraftOrder = async (connectionID:string,email:string,customer_id:string,region_id:string) : Promise<AdminDraftOrder > => {
@@ -25,4 +25,14 @@ export const getDraftOrder = async (connectionID:string,id:string) : Promise<{dr
           'Authorization': `Bearer ${connectionID}`
         }
     })
+}
+
+export const getOrder = async (orderID:string) : Promise<StoreOrder | null> => {
+  try {
+    const {order}  = await sdk.store.order.retrieve(orderID,{fields: "+customer.*"})
+    return order
+  } catch (error) {
+    console.log(error)
+    return null
+  }
 }

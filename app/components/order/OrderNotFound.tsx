@@ -12,7 +12,7 @@ export const OrderNotFound = () => {
                 <ArrowLeft className="mr-2 h-4 w-4" /> {t("back_to_orders")}
             </LinkButton>
             <div className="text-center py-12">
-                <h2 className="text-lg font-medium">{t("order_not_found")}</h2>
+                <h2 className="dark:text-white text-lg font-medium">{t("order_not_found")}</h2>
                 <p className="text-muted-foreground mt-2">{t("order_not_exist")}</p>
             </div>
         </div>
