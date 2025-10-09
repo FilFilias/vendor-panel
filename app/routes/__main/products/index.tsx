@@ -113,7 +113,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     } 
     else {
       let {result,count,take,skip} = await getVendorsProducts(session.data["connect.sid"] as string,parseInt(page),categoryIDs,salesChannelID);
-      products = result
+      products = result.map(product => ({
+        id:product.id,
+        title:product.title,
+        status:product.status,
+        image:product.thumbnail
+      }))
       totalPages = Math.ceil(count / take);
       currentPage = Math.floor(skip / take) + 1;    
       total = count
