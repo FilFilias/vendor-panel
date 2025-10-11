@@ -64,7 +64,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let page = urlSearchParams.page ?? 1
     let session = await sessionStorage.getSession(request.headers.get("Cookie"))
     let {result,count,take,skip} = await getVendorsInvitations(session.data["connect.sid"] as string,parseInt(page));
-    console.log(result)
+
     let invitations = result?.map( inv => ({
         id: inv.invite.id,
         email: inv.invite?.email,
