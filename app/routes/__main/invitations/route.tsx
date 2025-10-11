@@ -12,29 +12,49 @@ import { LinkButton } from "~/components/ui/buttoLink";
 export async function action({
     request,
   }: ActionFunctionArgs) {
-    const body = await request.formData();
-  
-    let { id } = Object.fromEntries(body)
-  
-    let session = await sessionStorage.getSession(request.headers.get("Cookie"))
-  
-    try {
-        let inviteRefreshvendor = await sdk.client.fetch('/vendor/invitation/resend',{
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              'Authorization': `Bearer ${session.data['connect.sid']}`
-            },
-            body: {
-              "invite_id": id
-            },
-          })
-        return data({inviteRefreshvendor,success:true});
-    } catch (error) {
-        console.error(error)
-        return data({error:error})
+  const body = await request.formData();
+
+  let { _action, id } = Object.fromEntries(body)
+
+  let session = await sessionStorage.getSession(request.headers.get("Cookie"))
+
+  switch (_action) {
+    case "resend-invitation": {
+      try {
+          let inviteRefreshvendor = await sdk.client.fetch('/vendor/invitation/resend',{
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${session.data['connect.sid']}`
+              },
+              body: {
+                "invite_id": id
+              },
+            })
+          return data({inviteRefreshvendor,success:true});
+      } catch (error) {
+          console.error(error)
+          return data({error:error})
+      }
     }
-  
+    case "delete-invitation": {
+      try {
+        let inviteDelete = await sdk.client.fetch(`/vendor/invitation/delete/${id}`,{
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${session.data['connect.sid']}`
+          }
+        })
+        return data({inviteDelete,success:true});
+      } catch (error) {
+          console.error(error)
+          return data({error:error})
+      }
+    }
+    default:
+      return data({ error: "Unknown action" }, { status: 400 });
+  }  
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -44,13 +64,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let page = urlSearchParams.page ?? 1
     let session = await sessionStorage.getSession(request.headers.get("Cookie"))
     let {result,count,take,skip} = await getVendorsInvitations(session.data["connect.sid"] as string,parseInt(page));
-
+    console.log(result)
     let invitations = result?.map( inv => ({
         id: inv.invite.id,
-        email: inv.invite.email,
+        email: inv.invite?.email,
         status: inv.invite.accepted ? "Accepted" : "Pending",
         sentDate: new Date(inv.invite.created_at),
-        sentBy: "admin~company.com",
+        sentBy: inv.invite?.vendor_admin?.email,
         expired: new Date(inv.invite.expires_at) < new Date(), // Check if expired
 
     }))

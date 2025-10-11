@@ -1,8 +1,8 @@
 import React from 'react'
-import InvitationBlock, { InvitationBlockProps } from './InvitationBlock';
+import InvitationBlock, { InvitationType } from './InvitationBlock';
 
 export type InvitationsListProps = {
-    invitations: InvitationBlockProps[];
+    invitations: InvitationType[];
 }
 
 const InvitationsList:React.FC<InvitationsListProps> = ({invitations}) => {

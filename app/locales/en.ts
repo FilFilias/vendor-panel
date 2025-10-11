@@ -141,6 +141,7 @@ export default {
     "delete_product":"Delete Product",
     "sure_to_delete": "Are you sure you want to delete",
     "sure_to_delete_variant": "Are you sure you want to delete variant",
+    "sure_to_delete_invitation": "Are you sure you want to delete invitation",
     "update": "Update",
     "update_product_status": "Update Product Status",
     "sure_to_update_status": "Are you sure you want to update status of ",

@@ -1,26 +1,36 @@
-import { RefreshCcw } from 'lucide-react';
-import React from 'react'
+import { RefreshCcw, TrashIcon } from 'lucide-react';
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useFetcher } from 'react-router';
 import { Button } from "~/components/ui/button";
+import { DeleteInvitationDialog } from './DeleteInvitationDialog';
+
+export type InvitationType = {
+    id:string;
+    email:string;
+    expired:boolean;
+    sentDate: string;
+    sentBy: string;
+    status:string;
+};
 
 export type InvitationBlockProps = {
-    invitation: {
-        id:string;
-        email:string;
-        expired:boolean;
-        sentDate: string;
-        sentBy: string;
-        status:string;
-    };
+    invitation: InvitationType;
 }
+
 const InvitationBlock:React.FC<InvitationBlockProps> = ({invitation}) => {
 
     let {t} = useTranslation()
     let fetcher = useFetcher()
+    const [deleteOpen, setDeleteOpen] = useState(false);
+
+    const onDeleteClick = (e: Event) => {
+        e.preventDefault();
+        setDeleteOpen((prevState) => !prevState);
+    };
 
     const onReSendClick = () => {
-        fetcher.submit({ id: invitation.id }, { method: "post" });
+        fetcher.submit({  _action:"resend-invitation", id: invitation.id }, { method: "post" });
     }
 
     return (
@@ -32,9 +42,11 @@ const InvitationBlock:React.FC<InvitationBlockProps> = ({invitation}) => {
                 <p className="text-sm text-muted-foreground mt-1">
                 {t("sent_at")}: <span className='text-lg text-main dark:text-white'>{invitation.sentDate?.toLocaleString()}</span>
                 </p>
-                <p className="text-md text-muted-foreground">
-                {t("sent_by")}: <span className='text-lg text-main dark:text-white'>{invitation.sentBy}</span>
-                </p>
+                {invitation.sentBy && 
+                    <p className="text-md text-muted-foreground">
+                       {t("sent_by")}: <span className='text-lg text-main dark:text-white'>{invitation.sentBy}</span>
+                    </p>
+                }
             </div>
             {invitation.status == 'Accepted' ?
                 <span className='bg-success p-2 rounded-full text-white text-xs'>
@@ -58,11 +70,30 @@ const InvitationBlock:React.FC<InvitationBlockProps> = ({invitation}) => {
                             </Button>
                         </div>
                     :
-                        <span className='bg-ring p-2 rounded-full text-white text-xs'>
-                            {t("pending")}
-                        </span>
+                        <div className='flex flex-col items-center space-y-2'>
+                            <span className='w-full bg-ring p-2 rounded-full text-white text-xs text-center'>
+                                {t("pending")}
+                            </span>
+                            <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={onDeleteClick}
+                                className="border-main hover:border-orange rounded-full max-w-[250px] w-full flex items-center justify-center gap-2"
+                            >
+                                <TrashIcon className={`h-3.5 w-3.5`} />
+                                {t("delete")}
+                            </Button>
+                        </div>
+
             }
             </div>
+            {deleteOpen && (
+                <DeleteInvitationDialog
+                    invitation={invitation}
+                    open={deleteOpen}
+                    onOpenChange={setDeleteOpen}
+                />
+            )}
         </div>
     )
 }

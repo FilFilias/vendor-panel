@@ -69,6 +69,7 @@ export interface StoreVendorInvitation {
         token: string;
         expires_at: string;
         created_at: string;
+        vendor_admin?:StoreVendorAdmin
     }
 }
 
