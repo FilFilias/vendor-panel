@@ -93,7 +93,7 @@ export default {
     "accepted": "Accepted",
     "pending": "Pending",
     "expired": "Expired",
-    "resend": "Resend",
+    "refresh": "Refresh",
     "orders__track": "Track and manage your customers orders",
     "export":"Export",
     "create":"Create",

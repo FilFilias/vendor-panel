@@ -29,8 +29,8 @@ const InvitationBlock:React.FC<InvitationBlockProps> = ({invitation}) => {
         setDeleteOpen((prevState) => !prevState);
     };
 
-    const onReSendClick = () => {
-        fetcher.submit({  _action:"resend-invitation", id: invitation.id }, { method: "post" });
+    const onRefreshClick = () => {
+        fetcher.submit({  _action:"refresh-invitation", id: invitation.id }, { method: "post" });
     }
 
     return (
@@ -62,11 +62,11 @@ const InvitationBlock:React.FC<InvitationBlockProps> = ({invitation}) => {
                             <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={onReSendClick}
+                                onClick={onRefreshClick}
                                 className="border-main hover:border-orange rounded-full max-w-[250px] w-full flex items-center justify-center gap-2"
                             >
                                 <RefreshCcw className={`h-3.5 w-3.5`} />
-                                {t("resend")}
+                                {t("refresh")}
                             </Button>
                         </div>
                     :

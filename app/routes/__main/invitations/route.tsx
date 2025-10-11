@@ -19,9 +19,9 @@ export async function action({
   let session = await sessionStorage.getSession(request.headers.get("Cookie"))
 
   switch (_action) {
-    case "resend-invitation": {
+    case "refresh-invitation": {
       try {
-          let inviteRefreshvendor = await sdk.client.fetch('/vendor/invitation/resend',{
+          let inviteRefreshvendor = await sdk.client.fetch('/vendor/invitation/refresh',{
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
